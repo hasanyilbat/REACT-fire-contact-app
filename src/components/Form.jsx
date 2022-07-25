@@ -17,7 +17,7 @@ const Form = () => {
   };
 
   return (
-    <div className="w-25 p-5 ms-5">
+    <div className="w-25 p-5 ms-5 border border-2 border-dark">
       <div className="design-form">
         <div className="design">
           <p className="display-6 text-center">HASO DESIGN</p>

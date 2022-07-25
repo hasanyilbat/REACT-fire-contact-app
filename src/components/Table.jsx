@@ -33,12 +33,12 @@ const Table = () => {
   };
 
   return (
-    <div className="w-50 p-5 me-5">
+    <div className="w-50 p-5 me-5 border border-3 border-dark">
       <div>
         <h2 className="text-center display-6">CONTACTS</h2>
       </div>
       <div>
-        <table class="table table-striped table-dark text-center">
+        <table class="table table-striped table-dark text-center m-auto mt-4">
           <thead>
             <tr>
               <th scope="col">Username</th>
@@ -57,10 +57,13 @@ const Table = () => {
                   <td scope="row">{username}</td>
                   <td>{phoneNumber}</td>
                   <td>{gender}</td>
-                  <td className="text-center" onClick={() => handleDelete(row)}>
+                  <td
+                    className="text-center text-danger"
+                    onClick={() => handleDelete(row)}
+                  >
                     <FaTrash />
                   </td>
-                  <td className="text-center">
+                  <td className="text-center text-success">
                     <FaEdit
                       data-bs-toggle="modal"
                       data-bs-target="#edit-modal"

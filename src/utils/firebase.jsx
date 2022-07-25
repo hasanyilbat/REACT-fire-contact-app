@@ -42,7 +42,7 @@ export const getData = (setInfo) => {
     const data = snapshot.val();
     if (data !== null) {
       Object.values(data).map((personalData) => {
-        setInfo((info) => [...info, personalData]);
+        return setInfo((info) => [...info, personalData]);
       });
     }
   });
