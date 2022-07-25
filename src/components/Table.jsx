@@ -1,7 +1,7 @@
-import { getDatabase, ref, remove, update } from "firebase/database";
 import React, { useEffect, useState } from "react";
 import { deleteElement, getData, updateElement } from "../utils/firebase";
 import { FaTrash, FaEdit } from "react-icons/fa";
+import { toastWarnNotify } from "../utils/customToastify";
 const Table = () => {
   const [info, setInfo] = useState([]);
   const [tempId, setTempId] = useState("");
@@ -13,7 +13,6 @@ const Table = () => {
     getData(setInfo, info);
   }, []);
 
-  console.log(info);
   const handleDelete = (row) => {
     deleteElement(row);
   };
@@ -22,14 +21,15 @@ const Table = () => {
     setTempId(row.id);
     setEditUsername(row.username);
     setEditNumber(row.phoneNumber);
-    setEditNumber(row.gender);
+    setEditGender(row.gender);
   };
 
   const editSubmit = (e) => {
-    console.log(e.target);
     e.preventDefault();
-    console.log(tempId, editUsername, editNumber, editGender);
-    updateElement(tempId, editUsername, editNumber, editGender);
+
+    editUsername && editNumber && editGender
+      ? updateElement(tempId, editUsername, editNumber, editGender)
+      : toastWarnNotify("required field cannot be left blank");
   };
 
   return (
@@ -38,7 +38,7 @@ const Table = () => {
         <h2 className="text-center display-6">CONTACTS</h2>
       </div>
       <div>
-        <table class="table table-striped table-dark text-center m-auto mt-4">
+        <table className="table table-striped table-dark text-center m-auto mt-4">
           <thead>
             <tr>
               <th scope="col">Username</th>
@@ -49,11 +49,10 @@ const Table = () => {
             </tr>
           </thead>
           <tbody>
-            <div></div>
-            {info.map((row) => {
+            {info.map((row, index) => {
               const { username, phoneNumber, gender } = row;
               return (
-                <tr>
+                <tr key={index}>
                   <td scope="row">{username}</td>
                   <td>{phoneNumber}</td>
                   <td>{gender}</td>
@@ -77,19 +76,19 @@ const Table = () => {
         </table>
       </div>
 
-      <div class="modal" tabindex="-1" id="edit-modal">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Modal title</h5>
+      <div className="modal" tabIndex="-1" id="edit-modal">
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title">Modal title</h5>
               <button
                 type="button"
-                class="btn-close"
+                className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               ></button>
             </div>
-            <div class="modal-body">
+            <div className="modal-body">
               <form className="text-center" onSubmit={editSubmit}>
                 <div className="form-group">
                   <label htmlFor="username">Username</label>
@@ -126,17 +125,17 @@ const Table = () => {
                     <option value="female">Female</option>
                   </select>
                 </div>
-                <div class="modal-footer">
+                <div className="modal-footer">
                   <button
                     type="button"
-                    class="btn btn-secondary"
+                    className="btn btn-secondary"
                     data-bs-dismiss="modal"
                   >
                     Close
                   </button>
                   <button
                     type="submit"
-                    class="btn btn-primary"
+                    className="btn btn-primary"
                     data-bs-dismiss="modal"
                   >
                     Save changes

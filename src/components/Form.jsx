@@ -1,19 +1,20 @@
 import React, { useState } from "react";
 import { writeUserData } from "../utils/firebase";
 import { uid } from "uid";
+import { toastWarnNotify } from "../utils/customToastify";
 
 const Form = () => {
   const [userName, setUserName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [gender, setGender] = useState("");
 
-  console.log(userName);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const uuid = uid();
-    console.log(userName, phoneNumber, gender);
-    writeUserData(uuid, userName, phoneNumber, gender);
+
+    userName || phoneNumber || gender
+      ? writeUserData(uuid, userName, phoneNumber, gender)
+      : toastWarnNotify("required field cannot be left blank");
   };
 
   return (
@@ -35,7 +36,7 @@ const Form = () => {
               value={userName}
             />
           </div>
-          <div className="form-group">
+          <div className="form-group my-2">
             <label htmlFor="phone">Phone</label>
             <input
               type="text"
@@ -49,7 +50,8 @@ const Form = () => {
 
           <div className="mt-2">
             <select
-              className="custom-select"
+              className="custom-select w-100 text-center"
+              style={{ height: "2rem" }}
               onChange={(e) => setGender(e.target.value)}
             >
               <option value="">Gender</option>

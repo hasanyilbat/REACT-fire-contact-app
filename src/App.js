@@ -1,6 +1,7 @@
 import "./App.css";
 import Form from "./components/Form";
 import Table from "./components/Table";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
     >
       <Form />
       <Table />
+      <ToastContainer />
     </div>
   );
 }
