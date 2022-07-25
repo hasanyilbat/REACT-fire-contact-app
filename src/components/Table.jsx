@@ -1,6 +1,6 @@
-import { getDatabase } from "firebase/database";
+import { getDatabase, ref, remove } from "firebase/database";
 import React, { useEffect, useState } from "react";
-import { getData } from "../utils/firebase";
+import { deleteElement, getData } from "../utils/firebase";
 import { FaTrash, FaEdit } from "react-icons/fa";
 const Table = () => {
   const [info, setInfo] = useState([]);
@@ -8,7 +8,10 @@ const Table = () => {
     getData(setInfo, info);
   }, []);
 
-  handleDelete = (row) => {};
+  const handleDelete = (row) => {
+    // console.log(row);
+    deleteElement(row);
+  };
 
   console.log(info);
 
@@ -37,8 +40,8 @@ const Table = () => {
                   <td scope="row">{username}</td>
                   <td>{phoneNumber}</td>
                   <td>{gender}</td>
-                  <td className="text-center">
-                    <FaTrash onClick={handleDelete} />
+                  <td className="text-center" onClick={() => handleDelete(row)}>
+                    <FaTrash />
                   </td>
                   <td className="text-center">
                     <FaEdit />
