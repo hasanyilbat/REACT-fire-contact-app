@@ -5,7 +5,7 @@ import { FaTrash, FaEdit } from "react-icons/fa";
 const Table = () => {
   const [info, setInfo] = useState([]);
   const [tempId, setTempId] = useState("");
-  const [editSurname, setEditSurname] = useState("");
+  const [editUsername, setEditUsername] = useState("");
   const [editNumber, setEditNumber] = useState("");
   const [editGender, setEditGender] = useState("");
 
@@ -13,19 +13,23 @@ const Table = () => {
     getData(setInfo, info);
   }, []);
 
+  console.log(info);
   const handleDelete = (row) => {
     deleteElement(row);
   };
 
   const openEditWindow = (row) => {
     setTempId(row.id);
+    setEditUsername(row.username);
+    setEditNumber(row.phoneNumber);
+    setEditNumber(row.gender);
   };
 
   const editSubmit = (e) => {
     console.log(e.target);
     e.preventDefault();
-    console.log(tempId, editSurname, editNumber, editGender);
-    updateElement(tempId, editSurname, editNumber, editGender);
+    console.log(tempId, editUsername, editNumber, editGender);
+    updateElement(tempId, editUsername, editNumber, editGender);
   };
 
   return (
@@ -92,8 +96,8 @@ const Table = () => {
                     id="username"
                     aria-describedby="username"
                     placeholder="Enter username"
-                    onChange={(e) => setEditSurname(e.target.value)}
-                    value={editSurname}
+                    onChange={(e) => setEditUsername(e.target.value)}
+                    value={editUsername}
                   />
                 </div>
                 <div className="form-group">

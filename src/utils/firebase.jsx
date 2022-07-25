@@ -24,7 +24,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const db = getDatabase();
+const db = getDatabase(app);
 // Initialize Realtime Database and get a reference to the service
 
 export const writeUserData = (uuid, userName, phoneNumber, gender) => {
@@ -54,9 +54,9 @@ export const deleteElement = (row) => {
   console.log(row.id);
 };
 
-export const updateElement = (tempId, editSurname, editNumber, editGender) => {
+export const updateElement = (tempId, editUsername, editNumber, editGender) => {
   update(ref(db, `/${tempId}`), {
-    username: editSurname,
+    username: editUsername,
     phoneNumber: editNumber,
     gender: editGender,
     id: tempId,
