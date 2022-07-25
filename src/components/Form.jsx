@@ -15,8 +15,10 @@ const Form = () => {
     userName || phoneNumber || gender
       ? writeUserData(uuid, userName, phoneNumber, gender)
       : toastWarnNotify("required field cannot be left blank");
-  };
 
+    setUserName("");
+    setPhoneNumber("");
+  };
   return (
     <div className="w-25 p-5 ms-5 border border-2 border-dark">
       <div className="design-form">
