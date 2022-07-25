@@ -1,6 +1,13 @@
 import { initializeApp } from "firebase/app";
 
-import { getDatabase, onValue, ref, remove, set } from "firebase/database";
+import {
+  getDatabase,
+  onValue,
+  ref,
+  remove,
+  set,
+  update,
+} from "firebase/database";
 
 // TODO: Replace the following with your app's Firebase project configuration
 // See: https://firebase.google.com/docs/web/learn-more#config-object
@@ -45,4 +52,13 @@ export const deleteElement = (row) => {
   const db = getDatabase();
   remove(ref(db, `/${row.id}`));
   console.log(row.id);
+};
+
+export const updateElement = (tempId, editSurname, editNumber, editGender) => {
+  update(ref(db, `/${tempId}`), {
+    username: editSurname,
+    phoneNumber: editNumber,
+    gender: editGender,
+    id: tempId,
+  });
 };

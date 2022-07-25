@@ -24,7 +24,7 @@ const Form = () => {
         </div>
         <form className="text-center" onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="exampleInputEmail1">Username</label>
+            <label htmlFor="username">Username</label>
             <input
               type="text"
               className="form-control"
